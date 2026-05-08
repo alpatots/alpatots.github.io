@@ -1,0 +1,53 @@
+# Due to how Astro handles type inference with this structure,
+# we need to prefix all configuration keys with an underscore.
+
+[_.site]
+baseUrl = "https://alpatots.github.io"
+
+[_.globalMeta]
+title = "Sasha Patotski"
+description = "Personal website of Sasha Patotski — engineer and researcher."
+longDescription = "Sasha Patotski is a Member of Technical Staff at Microsoft Superintelligence, building MLOps and autonomous agent systems for AI researchers."
+keywords = ["Sasha Patotski", "machine learning", "AI", "software engineer", "MLOps", "mathematics"]
+
+[_.blogMeta]
+title = "Sasha Patotski — Blog"
+description = "Thoughts and writing by Sasha Patotski."
+longDescription = "Writing on software engineering, machine learning, and mathematics."
+keywords = ["blog", "writing"]
+
+[_.projectMeta]
+title = "Sasha Patotski — Publications"
+description = "Research publications by Sasha Patotski."
+longDescription = "Academic papers and research publications by Sasha Patotski."
+keywords = ["publications", "research", "mathematics", "algebra"]
+
+[_.notFoundMeta]
+title = "404 — Sasha Patotski"
+description = "Page not found."
+longDescription = "The page you are looking for does not exist."
+
+[_.hero]
+title = "Sasha Patotski"
+subtitle = "Member of Technical Staff<br />Microsoft Superintelligence"
+image = "/sasha_patotski.jpg"
+bio = "Building MLOps tooling and autonomous agent systems for Microsoft's AI infrastructure, supporting researchers training Raptor Mini and other frontier models. Prior experience spans ML benchmarking, experimentation infrastructure, and AI integrity engineering. Ph.D. in Mathematics from Cornell University. See the Work and Publications tabs for more."
+ctaText = "Download Resume"
+ctaUrl = "/sasha_patotski_resume.pdf"
+
+[_.personal]
+name = "Sasha Patotski"
+githubProfile = "https://github.com/alpatots"
+linkedinProfile = "https://www.linkedin.com/in/sasha-patotski/"
+
+[_.texts]
+articlesName = "Articles"
+projectsName = "Publications"
+viewAll = "View All"
+noArticles = "No articles found."
+noProjects = "No publications found."
+
+[_.menu]
+home = "/"
+work = "/work"
+publications = "/publications"

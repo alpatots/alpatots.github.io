@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from "astro:content";
+import Section from "../../components/common/Section.astro";
+import Prose from "../../components/Prose.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getConfigurationCollection } from "../../lib/utils";
+
+const items = await Promise.all(
+  (await getCollection("work"))
+    .sort((a, b) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf())
+    .map(async (item) => ({ data: item.data, Content: (await render(item)).Content }))
+);
+
+const { data: config } = await getConfigurationCollection();
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{config.personal.name} — Work</title>
+    <meta name="description" content={`Engineering work by ${config.personal.name}.`} />
+    <meta property="og:title" content={`${config.personal.name} — Work`} />
+    <meta property="og:url" content={`${config.site.baseUrl}/work`} />
+    <meta http-equiv="content-language" content="en" />
+    <meta name="language" content="English" />
+    <link rel="canonical" href={`${config.site.baseUrl}/work`} />
+  </Fragment>
+  <Section class="py-4 my-8">
+    <div class="pt-8 pb-16">
+      <h1 class="font-display text-3xl sm:text-4xl leading-loose">Work</h1>
+    </div>
+    <div class="flex flex-col gap-16">
+      {items.map(({ data, Content }) => (
+        <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-baseline">
+            <h2 class="font-display text-xl font-semibold">{data.title}</h2>
+            <span class="text-sm font-mono zag-text zag-transition shrink-0">{data.period}</span>
+          </div>
+          <p class="text-sm font-semibold zag-text zag-transition">{data.team}</p>
+          <div class="flex flex-row flex-wrap gap-2">
+            {data.tags?.map((tag) => (
+              <span class="-zag-text -zag-bg zag-transition px-2 py-1 text-sm font-semibold">{tag}</span>
+            ))}
+          </div>
+          <Prose>
+            <Content />
+          </Prose>
+        </div>
+      ))}
+    </div>
+  </Section>
+</Layout>

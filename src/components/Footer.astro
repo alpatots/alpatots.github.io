@@ -1,0 +1,18 @@
+---
+import { getConfigurationCollection } from "../lib/utils";
+
+const { data: config } = await getConfigurationCollection();
+
+const date = new Date();
+const year = date.getFullYear();
+---
+
+<footer class="mt-16 mb-8">
+  <p class="zag-text zag-transition text-center text-sm font-medium">
+    &copy; {year}
+    {config.personal.name}. All rights reserved.
+  </p>
+  <p class="zag-text zag-transition text-center text-sm mt-1">
+    Theme: <a href="https://github.com/RATIU5/zaggonaut" class="zag-offset underline" target="_blank">Zaggonaut</a>
+  </p>
+</footer>

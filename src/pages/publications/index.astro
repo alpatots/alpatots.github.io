@@ -1,0 +1,61 @@
+---
+import { getCollection, render } from "astro:content";
+import Section from "../../components/common/Section.astro";
+import Prose from "../../components/Prose.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getConfigurationCollection } from "../../lib/utils";
+
+const items = await Promise.all(
+  (await getCollection("project"))
+    .sort((a, b) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf())
+    .map(async (item) => ({ data: item.data, Content: (await render(item)).Content }))
+);
+
+const { data: config } = await getConfigurationCollection();
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{config.projectMeta.title}</title>
+    <meta name="description" content={config.projectMeta.longDescription ?? config.projectMeta.description} />
+    <meta property="og:title" content={config.projectMeta.title} />
+    <meta property="og:description" content={config.projectMeta.description} />
+    {config.projectMeta.keywords && (
+      <meta name="keywords" content={config.projectMeta.keywords.join(", ")} />
+    )}
+    <meta property="og:url" content={`${config.site.baseUrl}/publications`} />
+    <meta http-equiv="content-language" content="en" />
+    <meta name="language" content="English" />
+    <link rel="canonical" href={`${config.site.baseUrl}/publications`} />
+  </Fragment>
+  <Section class="py-4 my-8">
+    <div class="pt-8 pb-16">
+      <h1 class="font-display text-3xl sm:text-4xl leading-loose">Publications</h1>
+    </div>
+    <div class="flex flex-col gap-16">
+      {items.map(({ data, Content }) => (
+        <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-baseline">
+            {data.liveDemoUrl
+              ? <h2 class="font-display text-xl font-semibold">
+                  <a href={data.liveDemoUrl} class="zag-text zag-transition underline underline-offset-4" target="_blank" rel="noopener noreferrer">{data.title}</a>
+                </h2>
+              : <h2 class="font-display text-xl font-semibold">{data.title}</h2>
+            }
+            <span class="text-sm font-mono zag-text zag-transition shrink-0">
+              {data.timestamp.getFullYear()}
+            </span>
+          </div>
+          <div class="flex flex-row flex-wrap gap-2">
+            {data.tags?.map((tag) => (
+              <span class="-zag-text -zag-bg zag-transition px-2 py-1 text-sm font-semibold">{tag}</span>
+            ))}
+          </div>
+          <Prose>
+            <Content />
+          </Prose>
+        </div>
+      ))}
+    </div>
+  </Section>
+</Layout>

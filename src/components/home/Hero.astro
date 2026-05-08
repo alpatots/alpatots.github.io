@@ -1,0 +1,43 @@
+---
+import { getConfigurationCollection } from "../../lib/utils";
+
+const { data: config } = await getConfigurationCollection();
+---
+
+<div class="flex flex-col gap-6">
+  <div class="flex flex-col items-center sm:flex-row gap-8">
+    {config.hero.image && (
+      <div class="rounded-full w-40 h-40 mb-4 overflow-hidden shrink-0">
+        <img
+          src={config.hero.image}
+          alt={`${config.hero.title} profile photo`}
+          class="w-full h-full grayscale object-cover scale-[1.6]"
+        />
+      </div>
+    )}
+    <div class="flex flex-col gap-2">
+      <h1 class="text-3xl sm:text-4xl font-display font-semibold opsz text-center sm:text-left">
+        {config.hero.title}
+      </h1>
+      <h2 class="text-center text-xl sm:text-2xl font-mono font-medium sm:text-left">
+        <span set:html={config.hero.subtitle} />
+      </h2>
+    </div>
+  </div>
+  {config.hero.bio && (
+    <p class="zag-text zag-transition max-w-prose leading-relaxed">
+      {config.hero.bio}
+    </p>
+  )}
+  {config.hero.ctaText && config.hero.ctaUrl && (
+    <div>
+      <a
+        href={config.hero.ctaUrl}
+        download
+        class="zag-offset underline font-medium focus:outline-2 focus:outline-offset-2 focus:outline-zag-dark dark:focus:outline-zag-light"
+      >
+        {config.hero.ctaText}
+      </a>
+    </div>
+  )}
+</div>

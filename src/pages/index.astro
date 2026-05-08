@@ -1,0 +1,39 @@
+---
+import Section from "../components/common/Section.astro";
+import Hero from "../components/home/Hero.astro";
+import Layout from "../layouts/Layout.astro";
+import { getConfigurationCollection } from "../lib/utils";
+
+const { data: config } = await getConfigurationCollection();
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{config.globalMeta.title}</title>
+    <meta
+      name="description"
+      content={config.globalMeta.longDescription ?? config.globalMeta.description}
+    />
+    <meta property="og:title" content={config.globalMeta.title} />
+    <meta
+      property="og:description"
+      content={config.globalMeta.description}
+    />
+    {config.globalMeta.keywords && (
+      <meta name="keywords" content={config.globalMeta.keywords.join(", ")} />
+    )}
+    <meta property="og:url" content={config.site.baseUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={config.globalMeta.title} />
+    <meta
+      name="twitter:description"
+      content={config.globalMeta.description}
+    />
+    <meta http-equiv="content-language" content="en" />
+    <meta name="language" content="English" />
+    <link rel="canonical" href={config.site.baseUrl} />
+  </Fragment>
+  <Section class="my-16">
+    <Hero />
+  </Section>
+</Layout>

@@ -1,0 +1,28 @@
+{
+  "name": "alpatots",
+  "type": "module",
+  "version": "0.0.1",
+  "packageManager": "pnpm@10.6.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "preinstall": "npx only-allow pnpm",
+    "format": "biome format --write",
+    "lint": "biome lint --write",
+    "lint:md": "markdownlint-cli2 '**/*.md' '#node_modules' '#LICENSE.md'"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.4",
+    "astro": "^6.3.1",
+    "tailwindcss": "^4.2.4",
+    "toml": "^3.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.14",
+    "@types/node": "^22.19.18",
+    "markdownlint-cli2": "^0.17.2"
+  }
+}

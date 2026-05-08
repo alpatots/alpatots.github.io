@@ -10,11 +10,6 @@ description = "Personal website of Sasha Patotski — engineer and researcher."
 longDescription = "Sasha Patotski is a Member of Technical Staff at Microsoft Superintelligence, building MLOps and autonomous agent systems for AI researchers."
 keywords = ["Sasha Patotski", "machine learning", "AI", "software engineer", "MLOps", "mathematics"]
 
-[_.blogMeta]
-title = "Sasha Patotski — Blog"
-description = "Thoughts and writing by Sasha Patotski."
-longDescription = "Writing on software engineering, machine learning, and mathematics."
-keywords = ["blog", "writing"]
 
 [_.projectMeta]
 title = "Sasha Patotski — Publications"

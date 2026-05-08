@@ -82,36 +82,6 @@ const configuration = defineCollection({
     }),
 
     /**
-     * The blog page's metadata.
-     */
-    blogMeta: z.object({
-      /**
-       * The title of the page, used in the HTML `<title>` tag and Open Graph metadata.
-       */
-      title: z.string(),
-
-      /**
-       * The short description of the page, used in Open Graph metadata and as a fallback for SEO.
-       */
-      description: z.string(),
-
-      /**
-       * The long description of the page, used in Open Graph metadata and as a fallback for SEO.
-       */
-      longDescription: z.string().optional(),
-
-      /**
-       * The URL of the card image for social media sharing.
-       */
-      cardImage: z.url().optional(),
-
-      /**
-       * Keywords for SEO, used in the `<meta name="keywords">` tag.
-       */
-      keywords: z.array(z.string()).optional(),
-    }),
-
-    /**
      * The project page's metadata.
      */
     projectMeta: z.object({
@@ -220,73 +190,6 @@ const configuration = defineCollection({
   }),
 });
 
-/**
- * Loader and schema for the blog collection.
- * It loads markdown files from the `content/blogs` directory and defines the schema for each blog post.
- */
-const blog = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./content/blogs" }),
-  schema: z
-    .object({
-      /**
-       * The title of the blog post.
-       */
-      title: z.string(),
-
-      /**
-       * The slug for the blog post, used in the URL.
-       */
-      slug: z.string().optional(),
-
-      /**
-       * A short description of the blog post, used in Open Graph metadata and as a fallback for SEO.
-       */
-      description: z.string(),
-
-      /**
-       * The long description of the blog post, used in Open Graph metadata and as a fallback for SEO.
-       */
-      longDescription: z.string().optional(),
-
-      /**
-       * The URL of the card image for social media sharing.
-       */
-      cardImage: z.url().optional(),
-
-      /**
-       * The tags associated with the blog post, used for categorization and filtering.
-       */
-      tags: z.array(z.string()).optional(),
-
-      /**
-       * The estimated reading time of the blog post, in minutes.
-       */
-      readTime: z.number().optional(),
-
-      /**
-       * Whether the blog post is featured on the homepage.
-       */
-      featured: z.boolean().default(false),
-
-      /**
-       * The timestamp of the blog post, used for sorting and displaying the date.
-       */
-      timestamp: z.date().transform((val) => new Date(val)),
-    })
-    .transform((data) => {
-      const slug =
-        data.slug ??
-        data.title
-          .toLowerCase()
-          .replace(/\s+/g, "-")
-          .replace(/[^\w-]/g, "");
-      const newData = {
-        ...data,
-        slug,
-      };
-      return newData;
-    }),
-});
 
 /**
  * Loader and schema for the project collection.
@@ -386,4 +289,4 @@ const work = defineCollection({
     }),
 });
 
-export const collections = { blog, project, work, configuration };
+export const collections = { project, work, configuration };

@@ -184,8 +184,8 @@ const configuration = defineCollection({
      */
     menu: z.object({
       home: z.string().default("/"),
-      publications: z.string().default("/publications"),
       work: z.string().default("/work"),
+      publications: z.string().default("/publications"),
     }),
   }),
 });

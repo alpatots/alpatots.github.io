@@ -11,7 +11,7 @@
     "preinstall": "npx only-allow pnpm",
     "format": "biome format --write",
     "lint": "biome lint --write",
-    "lint:md": "markdownlint-cli2 '**/*.md' '#node_modules' '#LICENSE.md'"
+    "lint:md": "markdownlint-cli2 '**/*.md'"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
